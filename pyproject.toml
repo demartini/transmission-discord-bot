@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "transmission-discord-bot"
+version = "1.0.0"
+description = "A Python-based, self-hosted Discord bot designed to manage the Transmission BitTorrent client, leveraging the transmission-rpc library."
+authors = ["Iolar Demartini Junior <iolardemartini@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+transmission-rpc = "^7.0.3"
+python-dotenv = "^1.0.1"
+logging = "^0.4.9.6"
+colorlog = "^6.8.2"
+discord-py-interactions = "^5.11.0"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.4.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
