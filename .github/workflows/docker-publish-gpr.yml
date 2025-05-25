@@ -35,12 +35,12 @@ jobs:
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@v5.5.1
+        uses: docker/metadata-action@v5.7.0
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: Build and push Docker Image
-        uses: docker/build-push-action@v6.7.0
+        uses: docker/build-push-action@v6.17.0
         with:
           context: .
           platforms: linux/amd64,linux/arm64
