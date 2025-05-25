@@ -803,19 +803,22 @@ files = [
 
 [[package]]
 name = "transmission-rpc"
-version = "7.0.6"
+version = "7.0.11"
 description = "Python module that implements the Transmission bittorent client JSON-RPC protocol"
 optional = false
-python-versions = "<4.0,>=3.8"
+python-versions = "~=3.8"
 groups = ["main"]
 files = [
-    {file = "transmission_rpc-7.0.6-py3-none-any.whl", hash = "sha256:ad8efceb4b2f923233228f00a75c7418b6c99fbbb46d2f14400c0dd8fe3b0ee5"},
-    {file = "transmission_rpc-7.0.6.tar.gz", hash = "sha256:fc8a0a1a753a19d5b867e62e0386d6702c138b7c317cfdb7cb95bcc00fcb4164"},
+    {file = "transmission_rpc-7.0.11-py3-none-any.whl", hash = "sha256:94fd008b54640dd9fff14d7ae26848f901e9d130a70950b8930f9b395988914f"},
+    {file = "transmission_rpc-7.0.11.tar.gz", hash = "sha256:5872322e60b42e368bc9c4724773aea4593113cb19bd2da589f0ffcdabe57963"},
 ]
 
 [package.dependencies]
-requests = ">=2.23.0,<3.0.0"
+requests = ">=2.23,<3.0"
 typing-extensions = ">=4.5.0"
+
+[package.extras]
+dev = ["coverage (==7.6.0)", "furo (==2024.7.18) ; python_version >= \"3.9\"", "mypy (==1.11.1)", "pre-commit (==3.8.0) ; python_version >= \"3.9\"", "pytest (==8.3.2)", "pytest-github-actions-annotate-failures (==0.2.0)", "sphinx (>=7,<=8) ; python_version >= \"3.9\"", "sphinx-autobuild (==2024.4.16) ; python_version >= \"3.9\"", "sphinx-copybutton (==0.5.2) ; python_version >= \"3.9\"", "sphinx-github-style (==1.2.2) ; python_version >= \"3.9\"", "sphinx-new-tab-link (==0.5.2) ; python_version >= \"3.9\"", "types-requests (==2.32.0.20240712)", "yarl (==1.9.4)"]
 
 [[package]]
 name = "typing-extensions"
@@ -969,4 +972,4 @@ propcache = ">=0.2.1"
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "9b138ad5a7254c3f8b7e060c13c5a88424a9fbf3c17eb17660ea12ac31b744af"
+content-hash = "97c72c8c06ad153a5c7c2d8e03a117291271aa27903b619e8e64ce3fa6800a7e"
