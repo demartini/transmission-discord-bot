@@ -12,7 +12,7 @@ python = "^3.12"
 transmission-rpc = "^7.0.3"
 python-dotenv = "^1.0.1"
 logging = "^0.4.9.6"
-colorlog = "^6.8.2"
+colorlog = "^6.9.0"
 discord-py-interactions = "^5.11.0"
 
 [tool.poetry.group.dev.dependencies]
