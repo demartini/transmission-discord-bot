@@ -1,45 +1,37 @@
-# Use the official Python image as base
-FROM python:3-slim-bullseye as python-base
+FROM python:3-slim-bullseye AS python-base
 
-# Set environment variables
 ENV PYTHONUNBUFFERED=1 \
-  PYTHONDONTWRITEBYTECODE=1 \
-  PIP_NO_CACHE_DIR=off \
-  PIP_DISABLE_PIP_VERSION_CHECK=on \
-  PIP_DEFAULT_TIMEOUT=100 \
-  POETRY_HOME="/opt/poetry" \
-  POETRY_VIRTUALENVS_IN_PROJECT=true \
-  POETRY_NO_INTERACTION=1 \
-  PYSETUP_PATH="/opt/pysetup" \
-  VENV_PATH="/opt/pysetup/.venv"
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=on \
+    PIP_DISABLE_PIP_VERSION_CHECK=on \
+    PIP_DEFAULT_TIMEOUT=100 \
+    POETRY_HOME="/opt/poetry" \
+    POETRY_VIRTUALENVS_IN_PROJECT=true \
+    POETRY_NO_INTERACTION=1 \
+    PATH="/opt/poetry/bin:$PATH"
 
-ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
+FROM python-base AS builder-base
 
-FROM python-base as builder-base
-
-# Install system dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends curl build-essential && \
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y \
+        curl \
+        build-essential && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Install poetry
-RUN curl -sSL https://install.python-poetry.org | python3 -
+RUN --mount=type=cache,target=/root/.cache \
+    curl -sSL https://install.python-poetry.org | python3 -
 
-# Set the working directory in the container
-WORKDIR $PYSETUP_PATH
+WORKDIR /opt/pysetup
+COPY poetry.lock pyproject.toml ./
 
-# Copy the poetry files
-COPY ./poetry.lock ./pyproject.toml ./
+RUN --mount=type=cache,target=/root/.cache \
+    poetry install --no-root --without=dev
 
-# Install project dependencies
-RUN poetry install --no-root --no-dev
+COPY ./src /opt/pysetup/src
 
-FROM python-base as runtime
-
-# Copy the source code into the container
-COPY --from=builder-base $VENV_PATH $VENV_PATH
-COPY src/ /app
+FROM python-base AS runtime
+COPY --from=builder-base /opt/pysetup /opt/pysetup
+COPY ./src /app
 WORKDIR /app
-
-# Run the bot
 CMD ["python", "-u", "main.py"]
