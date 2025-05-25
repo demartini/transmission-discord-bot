@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.0.2 - 2025-05-25
+
+### 📦 Other
+
+- chore(main): release v1.0.1
+- chore(docker): improve Dockerfile build efficiency
+- chore(release): 1.0.2
+
 ## v1.0.1 - 2025-05-25
 
 ### 📦 Other
